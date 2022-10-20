@@ -6,8 +6,8 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 public class Operations {
-    String file_properties = "properties.txt";
-    String file_vehicles = "vehicles.txt";
+    String file_properties = "src/properties.txt";
+    String file_vehicles = "src/vehicles.txt";
 
 
     public List<Property> getProperties() {
@@ -49,7 +49,6 @@ public class Operations {
             isNotValid = false;
             base_value_of_land = sc.next();
             if (validator.isValidNumber(base_value_of_land)) {
-                System.out.println(isNotValid);
                 double base_value = Double.parseDouble(base_value_of_land);
                 if (!(base_value >= 5000 && base_value <= 50000)) {
                     isNotValid = true;
@@ -129,6 +128,7 @@ public class Operations {
             fw = new FileWriter(file, true);
             fw.write(p.toString());
             fw.close();
+            System.out.println("PROPERTY HAS SUCCESSFULLY ADDED.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -250,7 +250,6 @@ public class Operations {
             isNotValid = false;
             max_velocity = sc.next();
             if (validator.isValidNumber(max_velocity)) {
-                System.out.println(isNotValid);
                 int velocity = Integer.parseInt(max_velocity);
                 if (!(velocity >= 120 && velocity <= 300)) {
                     isNotValid = true;
