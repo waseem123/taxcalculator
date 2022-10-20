@@ -1,9 +1,8 @@
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 public class Submenus {
-    private static final String CREDENTIALS = "credentials.txt";
+    private static final String CREDENTIALS = "src/credentials.txt";
     public boolean login() {
         boolean status = false;
         try {
