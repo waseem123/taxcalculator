@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+
 public class Submenus {
     private static final String CREDENTIALS = "src/credentials.txt";
+
     public boolean login() {
         boolean status = false;
         try {
@@ -32,7 +34,8 @@ public class Submenus {
             System.out.println("1. ADD PROPERTY DETAILS");
             System.out.println("2. CALCULATE PROPERTY TAX");
             System.out.println("3. DISPLAY ALL PROPERTIES");
-            System.out.println("4. BACK TO MAIN MENU");
+            System.out.println("4. CLEAR DATA");
+            System.out.println("5. BACK TO MAIN MENU");
             Scanner sc = new Scanner(System.in);
             Operations o = new Operations();
             switch (sc.nextInt()) {
@@ -46,6 +49,9 @@ public class Submenus {
                     o.getAllProperties();
                     break;
                 case 4:
+                    o.resetPropertyData();
+                    break;
+                case 5:
                     return;
                 default:
                     System.out.println("ERROR : INVALID CHOICE. PLEASE SELECT THE OPTION BETWEEN 1 TO 4.");
@@ -58,7 +64,8 @@ public class Submenus {
             System.out.println("1. ADD VEHICLE DETAILS");
             System.out.println("2. CALCULATE VEHICLE TAX");
             System.out.println("3. DISPLAY ALL VEHICLES");
-            System.out.println("4. BACK TO MAIN MENU");
+            System.out.println("4. CLEAR DATA");
+            System.out.println("5. BACK TO MAIN MENU");
             Scanner sc = new Scanner(System.in);
             Operations o = new Operations();
             switch (sc.nextInt()) {
@@ -72,6 +79,9 @@ public class Submenus {
                     o.getAllVehicles();
                     break;
                 case 4:
+                    o.resetVehicleData();
+                    break;
+                case 5:
                     return;
                 default:
                     System.out.println("ERROR : INVALID CHOICE. PLEASE SELECT THE OPTION BETWEEN 1 TO 4.");

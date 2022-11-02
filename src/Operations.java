@@ -2,12 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Operations {
     String file_properties = "src/properties.txt";
     String file_vehicles = "src/vehicles.txt";
+    private String file_credentials = "src/credentials.txt";
 
 
     public List<Property> getProperties() {
@@ -136,7 +139,6 @@ public class Operations {
 
     public void getPropertyTax() {
         Scanner sc = new Scanner(System.in);
-        final DecimalFormat dfZero = new DecimalFormat("0.00");
         List<Property> properties = getProperties();
         if (properties.size() > 0) {
             displayProperties(properties);
@@ -488,5 +490,96 @@ public class Operations {
         System.out.printf("%1s %7s %17s %17s %17.2f %1s", "|", "TOTAL", "----------", total_no_of_properties + total_no_of_vehicles, property_sum + vehicle_sum, "|");
         System.out.println();
         System.out.println("+ ------------------------------------------------------------- +");
+    }
+
+    public void resetPropertyData() {
+        System.out.println("ARE YOU SURE? DO YOU WANT TO CLEAR ALL DATA? (Y: YES | N: NO) - ");
+        Scanner scanner = new Scanner(System.in);
+        char choice = scanner.next().charAt(0);
+
+        switch (choice) {
+            case 'Y':
+            case 'y':
+                if (authenticate()) {
+                    resetProperty();
+                } else {
+                    System.out.println("INVALID | WRONG PASSWORD. OPERATION COULD NOT BE COMPLETED.");
+                }
+                break;
+            case 'N':
+            case 'n':
+                System.out.println("OPERATION CANCELLED.");
+                break;
+            default:
+                System.out.println("INVALID INPUT.");
+
+        }
+    }
+
+    private void resetProperty() {
+        try {
+            FileWriter fileWriter = new FileWriter(file_properties);
+            fileWriter.write("");
+            fileWriter.close();
+            System.out.println("PROPERTY DATA RESET SUCCESSFUL.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private boolean authenticate() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("PLEASE ENTER YOUR PASSWORD - ");
+        String password = scanner.next();
+        File f = new File(file_credentials);
+        boolean authentication = false;
+        try {
+            Scanner sc = new Scanner(f);
+            if (sc.hasNext()) {
+                String pass = sc.nextLine().split(",")[1];
+                if (pass.equals(password)) {
+                    authentication = true;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return authentication;
+    }
+
+    public void resetVehicleData() {
+        System.out.println("ARE YOU SURE? DO YOU WANT TO CLEAR ALL DATA? (Y: YES | N: NO) - ");
+        Scanner scanner = new Scanner(System.in);
+        char choice = scanner.next().charAt(0);
+
+        switch (choice) {
+            case 'Y':
+            case 'y':
+                if (authenticate()) {
+                    resetVehicle();
+                } else {
+                    System.out.println("INVALID | WRONG PASSWORD. OPERATION COULD NOT BE COMPLETED.");
+                }
+                break;
+            case 'N':
+            case 'n':
+                System.out.println("OPERATION CANCELLED.");
+                break;
+            default:
+                System.out.println("INVALID INPUT.");
+
+        }
+    }
+
+    private void resetVehicle() {
+        try {
+            FileWriter fileWriter = new FileWriter(file_vehicles);
+            fileWriter.write("");
+            fileWriter.close();
+            System.out.println("VEHICLE DATA RESET SUCCESSFUL.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
