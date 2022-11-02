@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class Operations {
     String file_properties = "src/properties.txt";
     String file_vehicles = "src/vehicles.txt";
-    private String file_credentials = "src/credentials.txt";
 
 
     public List<Property> getProperties() {
@@ -300,6 +299,7 @@ public class Operations {
 
         System.out.print("ENTER THE PURCHASE COST OF THE VEHICLE - ");
         do {
+            isNotValid = false;
             purchase_cost = sc.next();
             if (validator.isValidNumber(purchase_cost)) {
                 double p_cost = Double.parseDouble(purchase_cost);
@@ -321,6 +321,7 @@ public class Operations {
             FileWriter fw = new FileWriter(file, true);
             fw.write(v.toString());
             fw.close();
+            System.out.println("VEHICLE ADDED SUCCESSFULLY.");
         } catch (
                 IOException e) {
             System.out.println(e.getMessage());
@@ -531,6 +532,7 @@ public class Operations {
         Scanner scanner = new Scanner(System.in);
         System.out.println("PLEASE ENTER YOUR PASSWORD - ");
         String password = scanner.next();
+        String file_credentials = "src/credentials.txt";
         File f = new File(file_credentials);
         boolean authentication = false;
         try {
